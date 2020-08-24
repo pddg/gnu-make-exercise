@@ -16,7 +16,10 @@ RUN apt-get update \
  && apt-get -y install --no-install-recommends \
         make \
         build-essential \
+        python3-pip \
  && apt-get clean \
  && apt-get autoremove --purge -y \
  && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --no-cache-dir \
+       mimesis
