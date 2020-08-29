@@ -1,4 +1,4 @@
-# Ex.5 Pattern/Target Specific Variable
+# Ex.06 Condition
 
 ## 問題
 
