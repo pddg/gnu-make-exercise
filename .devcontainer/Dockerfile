@@ -11,7 +11,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 ENV GO_VERSION 1.15
 ENV GOROOT /usr/local/go
-ENV PATH ${PATH}:${GOROOT}/bin
+ENV PATH ${PATH}:${GOROOT}/bin:/root/go/bin
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
