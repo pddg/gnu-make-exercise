@@ -9,6 +9,10 @@
 ARG VARIANT="focal"
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
+ENV GO_VERSION 1.15
+ENV GOROOT /usr/local/go
+ENV PATH ${PATH}:${GOROOT}/bin
+
 # ** [Optional] Uncomment this section to install additional packages. **
 #
 RUN apt-get update \
@@ -17,6 +21,12 @@ RUN apt-get update \
         make \
         build-essential \
         python3-pip \
+        wget \
+ && wget https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz \
+ && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
+ && rm go${GO_VERSION}.linux-amd64.tar.gz \
+ && apt-get remove --purge -y \
+       wget \
  && apt-get clean \
  && apt-get autoremove --purge -y \
  && rm -rf /var/lib/apt/lists/*
