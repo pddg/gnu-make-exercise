@@ -3,26 +3,20 @@ NUM=10
 SEED=main.seed
 .DEFAULT_GOAL=all
 
-foo.csv: $(SEED)
+CSVS=foo.csv bar.csv baz.csv
+JSONS=foo.json bar.json baz.json
+
+%.csv:
 	$(GEN_DATA) $@ -n $(NUM) -s $< -f csv
 
-bar.csv: $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f csv
+%.json:
+	$(GEN_DATA) $@ -n $(NUM) -s $< -f json
 
-baz.csv: $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f csv
-	
-foo.json: $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f json
-	
-bar.json: $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f json
-	
-baz.json: $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f json
+$(CSVS): $(SEED)
+$(JSONS): $(SEED)
 
 .PHONY: all
-all: foo.csv bar.csv baz.csv foo.json bar.json baz.json
+all: $(CSVS) $(JSONS)
 
 .PHONY: clean
 clean:
