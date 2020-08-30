@@ -6,11 +6,12 @@ SEED=seed.txt
 CSVS=foo.csv bar.csv baz.csv large_data.csv
 JSONS=foo.json bar.json baz.json large_data.json
 
-$(CSVS): $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f csv
+$(CSVS): FORMAT=csv
+$(JSONS): FORMAT=json
+large_data.%: NUM=100
 
-$(JSONS): $(SEED)
-	$(GEN_DATA) $@ -n $(NUM) -s $< -f json
+$(CSVS) $(JSONS): $(SEED)
+	$(GEN_DATA) $@ -n $(NUM) -s $< -f $(FORMAT)
 
 .PHONY: all
 all: $(CSVS) $(JSONS)
